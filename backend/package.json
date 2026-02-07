@@ -1,0 +1,1 @@
+{\n  "name": "wardrobe_ai",\n  "version": "1.0.0",\n  "private": true,\n  "dependencies": {\n    "express": "^4.17.1",\n    "prisma": "^2.30.0",\n    "jsonwebtoken": "^8.5.1"\n  }\n}
