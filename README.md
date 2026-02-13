@@ -1,8 +1,8 @@
-# WardrobeAI 👔✨
+# MODULR 👔✨
 
 **AI-Powered Outfit Recommendation System for Men**
 
-WardrobeAI helps you generate visually appealing outfits from your existing wardrobe based on occasion and color harmony. Built with modern web technologies and intelligent color theory algorithms.
+MODULR helps you generate visually appealing outfits from your existing wardrobe based on occasion and color harmony. Built with modern web technologies and intelligent color theory algorithms.
 
 ---
 
@@ -82,7 +82,7 @@ WardrobeAI helps you generate visually appealing outfits from your existing ward
 ## 📁 Project Structure
 
 ```
-wardrobeai/
+modulr/
 ├── src/
 │   ├── app/
 │   │   ├── components/
@@ -417,4 +417,4 @@ This project is for educational and demonstration purposes.
 
 **Built with ❤️ for fashion-forward developers**
 
-WardrobeAI - Making outfit decisions easier, one recommendation at a time! 👔✨
+MODULR - Making outfit decisions easier, one recommendation at a time! 👔✨

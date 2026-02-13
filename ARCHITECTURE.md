@@ -1,8 +1,8 @@
-# WardrobeAI - Technical Architecture Documentation
+# MODULR - Technical Architecture Documentation
 
 ## System Overview
 
-WardrobeAI is a full-stack web application that provides AI-powered outfit recommendations based on color theory, occasion matching, and wardrobe compatibility algorithms.
+MODULR is a full-stack web application that provides AI-powered outfit recommendations based on color theory, occasion matching, and wardrobe compatibility algorithms.
 
 ---
 
@@ -755,8 +755,8 @@ App (Main Entry Point)
 ### State Management Strategy
 
 **Global State** (localStorage):
-- `wardrobeai_token`: JWT auth token
-- `wardrobeai_user`: User data object
+- `modulr_token`: JWT auth token
+- `modulr_user`: User data object
 
 **Component State**:
 - Auth mode (login/register)
@@ -1112,7 +1112,7 @@ Brief description of changes
 
 ## License & Attribution
 
-**Project**: WardrobeAI  
+**Project**: MODULR  
 **Purpose**: Educational demonstration  
 **License**: MIT (or specify)  
 
@@ -1123,6 +1123,6 @@ Brief description of changes
 
 ---
 
-**Maintainer**: WardrobeAI Development Team  
+**Maintainer**: MODULR Development Team  
 **Last Updated**: February 7, 2026  
 **Version**: 1.0.0

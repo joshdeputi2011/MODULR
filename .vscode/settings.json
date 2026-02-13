@@ -1,0 +1,10 @@
+{
+  "deno.enable": true,
+  "deno.config": "./deno.json",
+  "[typescript]": {
+    "defaultFormatter": "denoland.vscode-deno"
+  },
+  "[typescriptreact]": {
+    "defaultFormatter": "denoland.vscode-deno"
+  }
+}

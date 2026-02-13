@@ -11,16 +11,35 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Label } from './ui/label';
 import { Sparkles, Loader2, Info } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
-import { toast } from 'sonner';
-import { generateOutfits, ClothingItem } from '../lib/api';
+import { ClothingItem } from '../lib/api';
+
+// Toast notifications helper
+const toast = {
+  success: (message: string) => console.log('✓', message),
+  error: (message: string) => console.error('✗', message),
+  info: (message: string) => console.info('ℹ', message),
+};
 
 const occasions = [
-  { value: 'formal', label: 'Formal', icon: '🤵' },
   { value: 'casual', label: 'Casual', icon: '👕' },
-  { value: 'work', label: 'Work', icon: '💼' },
-  { value: 'college', label: 'College', icon: '🎓' },
   { value: 'party', label: 'Party', icon: '🎉' },
-  { value: 'travel', label: 'Travel', icon: '✈️' },
+  { value: 'formal', label: 'Formal', icon: '🤵' },
+  { value: 'date', label: 'Date', icon: '💖' },
+  { value: 'college', label: 'College', icon: '🎓' },
+];
+
+const skinTones = [
+  { value: 'fair', label: 'Fair', icon: '🌤️' },
+  { value: 'medium', label: 'Medium', icon: '🌅' },
+  { value: 'olive', label: 'Olive', icon: '🫒' },
+  { value: 'dark', label: 'Dark', icon: '🌑' },
+];
+
+const bodyTypes = [
+  { value: 'slim', label: 'Slim', icon: '🧍' },
+  { value: 'athletic', label: 'Athletic', icon: '🏃' },
+  { value: 'muscular', label: 'Muscular', icon: '💪' },
+  { value: 'plus', label: 'Plus', icon: '🫶' },
 ];
 
 interface OutfitCombination {
@@ -35,31 +54,60 @@ interface OutfitCombination {
 }
 
 export function OutfitGenerator() {
+  const apiBase = (((import.meta as any).env?.VITE_API_BASE_URL || 'http://127.0.0.1:8000')).replace(/\/+$/, '');
+  const [selectedSkinTone, setSelectedSkinTone] = useState('');
+  const [selectedBodyType, setSelectedBodyType] = useState('');
   const [selectedOccasion, setSelectedOccasion] = useState('');
   const [outfits, setOutfits] = useState<OutfitCombination[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasGenerated, setHasGenerated] = useState(false);
 
   const handleGenerate = async () => {
-    if (!selectedOccasion) {
-      toast.error('Please select an occasion');
+    if (!selectedSkinTone || !selectedBodyType || !selectedOccasion) {
+      toast.error('Please select skin tone, body type, and occasion');
       return;
     }
 
     setLoading(true);
+
     try {
-      const response = await generateOutfits({
-        occasion: selectedOccasion,
-        maxOutfits: 10,
+      const response = await fetch(`${apiBase}/generate-outfit`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          skinTone: selectedSkinTone,
+          bodyType: selectedBodyType,
+          occasion: selectedOccasion,
+          maxOutfits: 5,
+        }),
       });
 
-      setOutfits(response.data || []);
+      const raw = await response.text();
+      let data: any = null;
+
+      if (raw) {
+        try {
+          data = JSON.parse(raw);
+        } catch {
+          data = null;
+        }
+      }
+
+      if (!response.ok) {
+        const message = data?.detail || data?.error || data?.message || 'Failed to generate outfits';
+        throw new Error(message);
+      }
+
+      const results = data?.data || data?.outfits || data || [];
+      setOutfits(results);
       setHasGenerated(true);
 
-      if (response.data && response.data.length > 0) {
-        toast.success(response.message || 'Outfits generated!');
+      if (Array.isArray(results) && results.length > 0) {
+        toast.success(data?.message || 'Outfits generated!');
       } else {
-        toast.info(response.message || 'No outfits found for this occasion');
+        toast.info('No outfits found');
       }
     } catch (error: any) {
       toast.error(error.message || 'Failed to generate outfits');
@@ -107,7 +155,43 @@ export function OutfitGenerator() {
 
       <Card>
         <CardContent className="pt-6">
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row flex-wrap gap-4">
+            <div className="flex-1 space-y-2">
+              <Label htmlFor="skinTone">Skin Tone</Label>
+              <Select value={selectedSkinTone} onValueChange={setSelectedSkinTone}>
+                <SelectTrigger id="skinTone">
+                  <SelectValue placeholder="Select skin tone" />
+                </SelectTrigger>
+                <SelectContent>
+                  {skinTones.map((tone) => (
+                    <SelectItem key={tone.value} value={tone.value}>
+                      <span className="flex items-center gap-2">
+                        <span>{tone.icon}</span>
+                        <span>{tone.label}</span>
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex-1 space-y-2">
+              <Label htmlFor="bodyType">Body Type</Label>
+              <Select value={selectedBodyType} onValueChange={setSelectedBodyType}>
+                <SelectTrigger id="bodyType">
+                  <SelectValue placeholder="Select body type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {bodyTypes.map((type) => (
+                    <SelectItem key={type.value} value={type.value}>
+                      <span className="flex items-center gap-2">
+                        <span>{type.icon}</span>
+                        <span>{type.label}</span>
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
             <div className="flex-1 space-y-2">
               <Label htmlFor="occasion">Select Occasion</Label>
               <Select value={selectedOccasion} onValueChange={setSelectedOccasion}>
@@ -129,7 +213,7 @@ export function OutfitGenerator() {
             <div className="flex items-end">
               <Button
                 onClick={handleGenerate}
-                disabled={loading || !selectedOccasion}
+                disabled={loading || !selectedSkinTone || !selectedBodyType || !selectedOccasion}
                 size="lg"
                 className="w-full md:w-auto"
               >

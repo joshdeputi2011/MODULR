@@ -1,5 +1,5 @@
 /**
- * WardrobeAI - Main Application
+ * MODULR - Main Application
  * AI-powered outfit recommendation system
  */
 
@@ -75,7 +75,7 @@ export default function App() {
                   <Sparkles className="size-8 text-white" />
                 </div>
                 <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  WardrobeAI
+                  MODULR
                 </h1>
               </div>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -136,7 +136,7 @@ export default function App() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                    WardrobeAI
+                    MODULR
                   </h1>
                   <p className="text-xs text-muted-foreground">Smart Outfit Recommendations</p>
                 </div>
@@ -199,7 +199,7 @@ export default function App() {
               Built with Next.js, TypeScript, Tailwind CSS, and AI-powered color intelligence
             </p>
             <p className="mt-1">
-              WardrobeAI - Your personal fashion assistant 👔✨
+              MODULR - Your personal fashion assistant 👔✨
             </p>
           </div>
         </footer>

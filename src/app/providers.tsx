@@ -1,5 +1,5 @@
 /**
- * Theme Provider for WardrobeAI
+ * Theme Provider for MODULR
  */
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes';

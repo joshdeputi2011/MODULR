@@ -61,7 +61,7 @@ export function AuthForm({ mode, onSuccess, onToggleMode }: AuthFormProps) {
         <CardDescription>
           {mode === 'login'
             ? 'Sign in to access your wardrobe'
-            : 'Get started with WardrobeAI'}
+            : 'Get started with MODULR'}
         </CardDescription>
       </CardHeader>
       <CardContent>

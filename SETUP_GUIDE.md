@@ -1,6 +1,6 @@
-# WardrobeAI - Setup & Quick Start Guide 🚀
+# MODULR - Setup & Quick Start Guide 🚀
 
-## Welcome to WardrobeAI!
+## Welcome to MODULR!
 
 This guide will help you get started with your AI-powered wardrobe assistant.
 
@@ -89,7 +89,7 @@ This guide will help you get started with your AI-powered wardrobe assistant.
 
 ### How the Color Engine Works
 
-WardrobeAI uses advanced color theory to create harmonious outfits:
+MODULR uses advanced color theory to create harmonious outfits:
 
 #### 1. **Neutral Colors** (Always Safe)
 - Black, White, Grey
@@ -457,4 +457,4 @@ A: Currently optimized for men's fashion. Women's version coming soon!
 
 **Happy Styling! 👔✨**
 
-Built with ❤️ by WardrobeAI Team
+Built with ❤️ by MODULR Team
